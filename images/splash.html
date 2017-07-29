@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<script>
+window.onload = function () {
+
+	var parallaxBox = document.getElementById ( 'box' );
+	var c1left = document.getElementById ( 'l1' ).offsetLeft,
+	c1top = document.getElementById ( 'l1' ).offsetTop,
+	c2left = document.getElementById ( 'l2' ).offsetLeft,
+	c2top = document.getElementById ( 'l2' ).offsetTop,
+	c3left = document.getElementById ( 'l3' ).offsetLeft,
+	c3top = document.getElementById ( 'l3' ).offsetTop,
+	c4left = document.getElementById ( 'l4' ).offsetLeft,
+	c4top = document.getElementById ( 'l4' ).offsetTop;
+
+	parallaxBox.onmousemove = function ( event ) {
+		event = event || window.event;
+		var x = event.clientX - parallaxBox.offsetLeft,
+		y = event.clientY - parallaxBox.offsetTop;
+
+		mouseParallax ( 'l1', c1left, c1top, x, y, 5 );
+		mouseParallax ( 'l2', c2left, c2top, x, y, 15 );
+		mouseParallax ( 'l3', c3left, c3top, x, y, 30 );
+		mouseParallax ( 'l4', c4left, c4top, x, y, 65 );
+	}
+
+}
+
+function mouseParallax ( id, left, top, mouseX, mouseY, speed ) {
+	var obj = document.getElementById ( id );
+	var parentObj = obj.parentNode,
+	containerWidth = parseInt( parentObj.offsetWidth ),
+	containerHeight = parseInt( parentObj.offsetHeight );
+	obj.style.left = left - ( ( ( mouseX - ( parseInt( obj.offsetWidth ) / 2 + left ) ) / containerWidth ) * speed ) + 'px';
+	obj.style.top = top - ( ( ( mouseY - ( parseInt( obj.offsetHeight ) / 2 + top ) ) / containerHeight ) * speed ) + 'px';
+}
+
+</script>
+<style>
+@charset "UTF-8";
+
+*, *:after, *:before {
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body, html {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+
+  overflow: hidden;
+}
+
+body {
+	background: #5a889e;
+}
+
+main#box {
+	background-image: url('images/background.jpg');
+  background-size: cover;
+	background-position: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.layer {
+	position: absolute;
+	display: block;
+}
+
+#sun {
+	background: #ffcf37;
+	-webkit-box-shadow: 0px 0px 18px 5px rgba(236, 236, 133, 0.75);
+	-moz-box-shadow: 0px 0px 18px 5px rgba(236, 236, 133, 0.75);
+	box-shadow: 0px 0px 18px 5px rgba(236, 236, 133, 0.75);
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+}
+
+
+#l1 {
+	z-index: 1;
+	top: 30px;
+	left: 80px;
+}
+
+#l2 {
+	z-index: 2;
+	top: 50px;
+  left: -30px;
+}
+
+#l3 {
+	z-index: 3;
+	top: 80px;
+	left: 0px;
+}
+
+#l4 {
+	z-index: 4;
+	bottom: 0;
+	left: -100px;
+}
+#for {
+  background-image: url('images/foreground.png');
+  width: 110vw;
+  height: 200px;
+}
+.continue {
+  background-color: #240220;
+  height: 200px;
+	position: absolute;
+	bottom: -160px;
+	width: 100%;
+}
+</style>
+</head>
+<body>
+  <main id="box">
+			<div class="layer" id="l1">
+				<div id="sun">&nbsp;</div>
+			</div>
+			<div class="layer" id="l2">
+
+			</div>
+			<div class="layer" id="l3">
+
+			</div>
+			<div class="layer" id="l4">
+				<div id="for">&nbsp;</div>
+			</div>
+			<div class="continue">
+
+			</div>
+		</main>
+</body>
+</html>
